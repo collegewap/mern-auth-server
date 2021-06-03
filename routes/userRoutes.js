@@ -135,9 +135,9 @@ router.get("/logout", verifyUser, (req, res, next) => {
         (item) => item.refreshToken === refreshToken
       );
 
-      console.log({ tokenIndex });
-
-      user.refreshToken.id(user.refreshToken[tokenIndex]._id).remove();
+      if (tokenIndex !== -1) {
+        user.refreshToken.id(user.refreshToken[tokenIndex]._id).remove();
+      }
 
       user.save((err, user) => {
         if (err) {
